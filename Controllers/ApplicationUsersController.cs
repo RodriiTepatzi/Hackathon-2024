@@ -7,6 +7,7 @@ using Hackathon_2024_API.Schemas;
 using Hackathon_2024_API.Data;
 using Hackathon_2024_API.Data.Consts;
 using System.Reflection.Metadata.Ecma335;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hackathon_2024_API.Controllers
 {
@@ -63,6 +64,35 @@ namespace Hackathon_2024_API.Controllers
 
             return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage = null });
         }
+
+        [HttpGet]
+        [Route("phone/{phone}")]
+        public async Task<IActionResult> GetUserByPhoneAsync(string phone)
+        { 
+            if(string.IsNullOrEmpty(phone)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
+
+            var result = await _applicationUsersService.GetUserByPhoneAsync(phone);
+
+            if (result == null) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.OBJECT_NOT_FOUND });
+
+            return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage = null });
+
+        }
+
+        [HttpGet]
+        [Route("email/{email}")]
+        public async Task<IActionResult> GetUserByEmailAsync(string email)
+        {
+            if (string.IsNullOrEmpty(email)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
+
+            var result = await _applicationUsersService.GetUserByEmailAsync(email);
+
+            if (result == null) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.OBJECT_NOT_FOUND });
+
+            return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage = null });
+
+        }
+
 
     }
 }

@@ -32,6 +32,7 @@ namespace Hackathon_2024_API.Services
                 PictureUrl = applicationUsersSchema.PictureUrl,
                 WorkId = applicationUsersSchema.WorkId,
                 PhoneNumber = applicationUsersSchema.PhoneNumber,
+                UserStatus = "pending",
 
 
             };
@@ -102,13 +103,34 @@ namespace Hackathon_2024_API.Services
             {
                 return null;
             }
-
-            
-
-            
-            
         
-        
+        }
+
+        public async Task<ApplicationUser?> GetUserByPhoneAsync(string phone)
+        {
+            try
+            {
+
+                var result = await _context.ApplicationUsers.SingleOrDefaultAsync(i => i.PhoneNumber == phone);
+
+                if (result == null) return null;
+
+                var entity = _context.Entry(result);
+
+                if (entity.State == EntityState.Unchanged)
+                {
+                    return entity.Entity;
+                }
+                else
+                {
+                    return entity.Entity;
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+
         }
 
     }
