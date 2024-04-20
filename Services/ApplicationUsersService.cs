@@ -7,13 +7,13 @@ using Hackathon_2024_API.Schemas;
 
 namespace Hackathon_2024_API.Services
 {
-    public class ApplicationUsersService:IApplicationUsersService
+    public class ApplicationUsersService : IApplicationUsersService
     {
         private readonly AppDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
 
-        public ApplicationUsersService(AppDbContext context, UserManager<ApplicationUser> userManager) { 
+        public ApplicationUsersService(AppDbContext context, UserManager<ApplicationUser> userManager) {
 
             _context = context;
             _userManager = userManager;
@@ -32,7 +32,8 @@ namespace Hackathon_2024_API.Services
                 PictureUrl = applicationUsersSchema.PictureUrl,
                 WorkId = applicationUsersSchema.WorkId,
                 PhoneNumber = applicationUsersSchema.PhoneNumber,
-                
+                UserStatus = "pending",
+
 
             };
 
@@ -58,13 +59,78 @@ namespace Hackathon_2024_API.Services
                 if (result == null) return null;
 
                 var entity = _context.Entry(result);
+
+
+                if (entity.State == EntityState.Unchanged)
+                {
+                    return entity.Entity;
+                }
+                else
+                {
+                    return entity.Entity;
+                }
+
             }
             catch (InvalidOperationException)
             {
                 return null;
             }
 
-            return null;
+            
+        }
+
+        public async Task<ApplicationUser?> GetUserByIDAsync(string id)
+        {
+            try
+            {
+
+                var result = await _context.ApplicationUsers.SingleOrDefaultAsync(i => i.Id == id);
+
+                if (result == null) return null;
+
+                var entity = _context.Entry(result);
+
+                if (entity.State == EntityState.Unchanged)
+                {
+                    return entity.Entity;
+                }
+                else
+                {
+                    return entity.Entity;
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        
+        }
+
+        public async Task<ApplicationUser?> GetUserByPhoneAsync(string phone)
+        {
+            try
+            {
+
+                var result = await _context.ApplicationUsers.SingleOrDefaultAsync(i => i.PhoneNumber == phone);
+
+                if (result == null) return null;
+
+                var entity = _context.Entry(result);
+
+                if (entity.State == EntityState.Unchanged)
+                {
+                    return entity.Entity;
+                }
+                else
+                {
+                    return entity.Entity;
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+
         }
 
     }

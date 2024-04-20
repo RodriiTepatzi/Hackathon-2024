@@ -9,7 +9,12 @@ namespace Hackathon_2024_API.Services
     {
         Task<ApplicationUser> CreateUserAsync(ApplicationUsersSchema applicationUsersSchema);
         Task<ApplicationUser?> GetUserByEmailAsync(string email);
-        
+        Task<ApplicationUser?> GetUserByIDAsync(string Id);
+        Task<ApplicationUser?> GetUserByPhoneAsync(string phone);
+
+
+
+
 
     }
 }
