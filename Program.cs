@@ -1,6 +1,7 @@
 
 using Hackathon_2024_API.Data;
 using Hackathon_2024_API.Models;
+using Hackathon_2024_API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +27,10 @@ namespace Hackathon_2024_API
 				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<AppDbContext>();
 
-			builder.Services.AddControllers();
+			builder.Services.AddTransient<IApplicationUsersService, ApplicationUsersService>();
+
+
+            builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
