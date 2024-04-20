@@ -20,7 +20,10 @@ namespace Hackathon_2024_API.Data
 			base.OnModelCreating(modelBuilder);
 		}
 
-		DbSet<ApplicationUser> ApplicationUsers;
+		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+		public DbSet<Package> Packages { get; set; }
+		public DbSet<Shiping> Shipings { get; set; }
+
 
 	}
 }
