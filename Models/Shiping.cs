@@ -13,9 +13,6 @@ namespace Hackathon_2024_API.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string? Id { get; set; }
 
-        public string? IdPacket { get; set; }
-
-
         //WareHouse, Awaiting, InRoute, Delivered, NotDelivered
         [Required]
         [StringLength(15)]
@@ -32,7 +29,6 @@ namespace Hackathon_2024_API.Models
         {
 
             { nameof(Id), Id is not null ? Id : "" },
-            { nameof(IdPacket), IdPacket is not null ? IdPacket: ""},
             { nameof(Status), Status is not null ? Status: ""},
             { nameof(IdCarrier), IdCarrier is not null ? IdCarrier: ""},
 
