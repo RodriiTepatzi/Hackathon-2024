@@ -35,14 +35,19 @@ namespace Hackathon_2024_API.Models
         [StringLength(15)]
         public string? PackageStatus{ get; set;}
         [Required]
-        [StringLength(50)]
-        public string? Coordinates { get; set; }
+        public double Latitude { get; set; }
+        [Required]
+        public double Longuitud { get; set; }
         [Required]
         public string? IdShiping { get; set; }
         [Required]
         public string? PackagePictureUrl { get; set; }
         [AllowNull]
         public string? PackageDeliveredPictureUrl { get; set;}
+
+        [NotMapped]
+        public double distanceToWereHouse = 0;
+        
 
         //FOREIGN KEY
         [ForeignKey("IdShiping")]
