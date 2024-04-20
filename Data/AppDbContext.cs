@@ -10,9 +10,11 @@ namespace Hackathon_2024_API.Data
 
 		}
 
-		protected override void OnConfiguring(DbContextOptionsBuilder builder)
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			builder.EnableSensitiveDataLogging();
+
+			// Habilitamos el registro de datos sensibles
+			optionsBuilder.EnableSensitiveDataLogging();
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,7 +22,7 @@ namespace Hackathon_2024_API.Data
 			base.OnModelCreating(modelBuilder);
 		}
 
-		DbSet<ApplicationUser> ApplicationUsers;
+		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
 	}
 }

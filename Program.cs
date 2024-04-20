@@ -17,12 +17,6 @@ namespace Hackathon_2024_API
 
 			Configuration = builder.Configuration;
 
-			// Add services to the container.
-
-			builder.Services.AddControllers();
-			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
 			builder.Services.AddDbContext<AppDbContext>(
 				options => options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnectionString"),
@@ -31,6 +25,10 @@ namespace Hackathon_2024_API
 				.AddIdentityCore<ApplicationUser>()
 				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<AppDbContext>();
+
+			builder.Services.AddControllers();
+			builder.Services.AddEndpointsApiExplorer();
+			builder.Services.AddSwaggerGen();
 
 			var app = builder.Build();
 
@@ -42,6 +40,7 @@ namespace Hackathon_2024_API
 
 			app.UseHttpsRedirection();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 
