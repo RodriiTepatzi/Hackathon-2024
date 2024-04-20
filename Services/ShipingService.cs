@@ -59,7 +59,7 @@ namespace Hackathon_2024_API.Services
 
         }
 
-        public async Task<List<Shiping>> GetShipingsByCarrier(string idCarrier)
+        public async Task<List<Shiping>> GetShipingsByCarrierAsync(string idCarrier)
         {
 
             var result = await _context.Shipings.Where(s => s.IdCarrier == idCarrier).ToListAsync();

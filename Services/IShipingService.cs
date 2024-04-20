@@ -10,7 +10,7 @@ namespace Hackathon_2024_API.Services
 
         Task<Shiping?> GetShipingByIdAsync(string id);
 
-        Task <List<Shiping>> GetShipingsByCarrier(string idCarrier);
+        Task <List<Shiping>> GetShipingsByCarrierAsync(string idCarrier);
 
 
     }

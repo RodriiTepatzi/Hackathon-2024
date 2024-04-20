@@ -51,6 +51,31 @@ namespace Hackathon_2024_API.Controllers
             return Ok(new DataResponse { Data = result.Dictionary, ErrorMessage = null });
         }
 
+        [HttpGet]
+        [Route("carrier/{idcarrier}")]
+
+        public async Task<IActionResult> GetShipingsByCarrier(string idCarrier)
+        {
+
+            if (!Guid.TryParse(idCarrier, out _)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
+
+
+            var result = await _shipingService.GetShipingsByCarrierAsync(idCarrier);
+
+            if (result == null) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.OBJECT_NOT_FOUND });
+
+            var data = new List<Dictionary<string, object>>();
+
+            foreach (var item in result) data.Add(item.Dictionary);
+
+            if (result.Count > 0) return Ok(new DataResponse { Data = data, ErrorMessage = null });
+
+            return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.OBJECT_NOT_FOUND });
+
+        }
+
+
+
 
     }
 }
