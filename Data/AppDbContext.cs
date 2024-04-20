@@ -1,4 +1,5 @@
 ﻿using Hackathon_2024_API.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hackathon_2024_API.Data

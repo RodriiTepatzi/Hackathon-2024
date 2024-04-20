@@ -13,29 +13,25 @@ namespace Hackathon_2024_API.Controllers
 {
     [ApiController]
     [Route("api/users")]
-    public class ApplicationUsersController:Controller
+    public class UsersController : Controller
     {
         
-        private readonly IApplicationUsersService _applicationUsersService;
+        private readonly IUsersService _applicationUsersService;
 
-        public ApplicationUsersController(IApplicationUsersService applicationUsersService) {
+        public UsersController(IUsersService applicationUsersService) {
 
             _applicationUsersService = applicationUsersService;
-
-
         }
 
-        [HttpPost]
         [Route("create")]
-        //[Authorize]
-        public async Task<IActionResult> CreateUserAsync([FromBody] ApplicationUsersSchema user) {
+		[HttpPost]
+		//[Authorize]
+		public async Task<IActionResult> CreateUserAsync([FromBody] UsersSchema user) {
             //validaciones
             if(string.IsNullOrEmpty(user.FirstName)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST});
             if(string.IsNullOrEmpty(user.LastName)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
             if(string.IsNullOrEmpty(user.Email))return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
-            if(string.IsNullOrEmpty(user.PictureUrl)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
             if(string.IsNullOrEmpty(user.WorkId)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
-            if(string.IsNullOrEmpty(user.PhoneNumber)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
             if(string.IsNullOrEmpty(user.Email)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
             if(string.IsNullOrEmpty(user.Password)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
             
@@ -50,38 +46,10 @@ namespace Hackathon_2024_API.Controllers
             return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage= null});
         }
 
-        [HttpGet]
-        [Route("id/{id}")]
 
-        public async Task<IActionResult> GetUserByIDAsync(string id)
-        {
-            if (!Guid.TryParse(id, out _)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
-
-
-            var result = await _applicationUsersService.GetUserByIDAsync(id);
-
-            if(result == null) return  BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.OBJECT_NOT_FOUND });
-
-            return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage = null });
-        }
-
-        [HttpGet]
-        [Route("phone/{phone}")]
-        public async Task<IActionResult> GetUserByPhoneAsync(string phone)
-        { 
-            if(string.IsNullOrEmpty(phone)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
-
-            var result = await _applicationUsersService.GetUserByPhoneAsync(phone);
-
-            if (result == null) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.OBJECT_NOT_FOUND });
-
-            return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage = null });
-
-        }
-
-        [HttpGet]
         [Route("email/{email}")]
-        public async Task<IActionResult> GetUserByEmailAsync(string email)
+		[HttpGet]
+		public async Task<IActionResult> GetUserByEmailAsync(string email)
         {
             if (string.IsNullOrEmpty(email)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
 
@@ -92,7 +60,6 @@ namespace Hackathon_2024_API.Controllers
             return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage = null });
 
         }
-
 
     }
 }

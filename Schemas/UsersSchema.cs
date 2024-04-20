@@ -1,8 +1,7 @@
 ﻿namespace Hackathon_2024_API.Schemas
 {
-    public class ApplicationUsersSchema
+    public class UsersSchema
     {
-        
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? PictureUrl { get; set; }

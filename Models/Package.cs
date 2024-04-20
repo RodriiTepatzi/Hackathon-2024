@@ -37,7 +37,7 @@ namespace Hackathon_2024_API.Models
         [Required]
         public double Latitude { get; set; }
         [Required]
-        public double Longuitud { get; set; }
+        public double Longitude { get; set; }
         [Required]
         public string? IdShiping { get; set; }
         [Required]
@@ -67,11 +67,11 @@ namespace Hackathon_2024_API.Models
             { nameof(ClientFullName), ClientFullName ?? "" },
             { nameof(ClientPhone), ClientPhone ?? "" },
             { nameof(PackageStatus), PackageStatus ?? "" },
-            { nameof(Coordinates), Coordinates ?? "" },
-            { nameof(IdShiping), IdShiping ?? "" },
+            { nameof(Latitude), Latitude},
+			{ nameof(Longitude), Longitude},
+			{ nameof(IdShiping), IdShiping ?? "" },
             { nameof(PackagePictureUrl), PackagePictureUrl ?? "" },
             { nameof(PackageDeliveredPictureUrl), PackageDeliveredPictureUrl ?? "" }
-
         };
 
         }

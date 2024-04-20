@@ -1,4 +1,5 @@
 
+using Hackathon_2024_API.Controllers;
 using Hackathon_2024_API.Data;
 using Hackathon_2024_API.Models;
 using Hackathon_2024_API.Services;
@@ -27,10 +28,12 @@ namespace Hackathon_2024_API
 				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<AppDbContext>();
 
-			builder.Services.AddTransient<IApplicationUsersService, ApplicationUsersService>();
+			builder.Services.AddTransient<IUsersService, UsersService>();
+			builder.Services.AddTransient<IShipingService, ShipingService>();
+			builder.Services.AddTransient<IPackageService, PackageService>();
 
 
-            builder.Services.AddControllers();
+			builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 

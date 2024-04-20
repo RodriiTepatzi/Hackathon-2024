@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Hackathon_2024_API.Models.Enums;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,9 +19,7 @@ namespace Hackathon_2024_API.Models
 		public string? WorkId { get; set; }
 		[Required]
 		[StringLength(20)]
-		[DefaultValue("pending")]
-		//active, pending, inactive
-		public string? UserStatus { get; set; }
+		public UserStatus? UserStatus { get; set; }
 
 		public Dictionary<string, object> ToDictionary => new Dictionary<string, object>
 		{
@@ -31,7 +30,7 @@ namespace Hackathon_2024_API.Models
 			{ nameof(WorkId), WorkId ?? ""},
 			{ nameof(PhoneNumber), PhoneNumber ?? ""},
 			{ nameof(Email), Email ?? ""},
-			{ nameof(UserStatus), UserStatus ?? ""},
+			{ nameof(UserStatus), UserStatus.Value },
 
 			
 		};

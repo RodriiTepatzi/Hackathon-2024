@@ -26,7 +26,7 @@ namespace Hackathon_2024_API.Classes
             foreach (Package package in this.PackageToday) {
 
                 double latB = package.Latitude;
-                double longB = package.Longuitud;
+                double longB = package.Longitude;
 
                 package.distanceToWereHouse = this.distanciaEucladiana(latA, longA, latB, longB);
 
@@ -49,7 +49,7 @@ namespace Hackathon_2024_API.Classes
                 newShiping.IdCarrier = carrier.Id;
                 newShiping.Packets.Add(this.PackageToday[i].Id);
                 newShiping.LatAct = this.PackageToday[i].Latitude;
-                newShiping.LongAct = this.PackageToday[i].Longuitud;
+                newShiping.LongAct = this.PackageToday[i].Longitude;
 
                 shipings.Add(newShiping);
                 
@@ -66,7 +66,7 @@ namespace Hackathon_2024_API.Classes
                 {
                     double latitud_envio = shipings.FirstOrDefault(s => s.IdCarrier == carrier.Id).LatAct;
                     double longitud_envio = shipings.FirstOrDefault(s => s.IdCarrier == carrier.Id).LongAct;
-                    double distancia = this.distanciaEucladiana(package.Latitude, latitud_envio, package.Longuitud, longitud_envio);
+                    double distancia = this.distanciaEucladiana(package.Latitude, latitud_envio, package.Longitude, longitud_envio);
 
                     DatosDistancias datoDistancias = new DatosDistancias();
                     datoDistancias.id_paquete = package.Id;
