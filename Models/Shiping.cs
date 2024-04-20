@@ -25,6 +25,15 @@ namespace Hackathon_2024_API.Models
         [ForeignKey("IdCarrier")]
         public ApplicationUser? Carrier { get; set; }
 
+        [NotMapped]
+        public List<string>? Packets { get; set; }
+        [NotMapped]
+        public double LatAct { get; set; }
+        [NotMapped]
+        public double LongAct { get; set; }
+
+       
+
         public Dictionary<string, object> Dictionary => new Dictionary<string, object>
         {
 
