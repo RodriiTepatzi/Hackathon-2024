@@ -49,5 +49,20 @@ namespace Hackathon_2024_API.Controllers
             return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage= null});
         }
 
+        [HttpGet]
+        [Route("id/{id}")]
+
+        public async Task<IActionResult> GetUserByIDAsync(string id)
+        {
+            if (!Guid.TryParse(id, out _)) return BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.BAD_REQUEST });
+
+
+            var result = await _applicationUsersService.GetUserByIDAsync(id);
+
+            if(result == null) return  BadRequest(new DataResponse { Data = null, ErrorMessage = ResponseMessages.OBJECT_NOT_FOUND });
+
+            return Ok(new DataResponse { Data = result.ToDictionary, ErrorMessage = null });
+        }
+
     }
 }
