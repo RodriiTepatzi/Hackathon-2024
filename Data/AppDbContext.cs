@@ -23,6 +23,8 @@ namespace Hackathon_2024_API.Data
 		}
 
 		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+		public DbSet<Package> Packages { get; set; }
+		public DbSet<Shiping> Shipings { get; set; }
 
 	}
 }
